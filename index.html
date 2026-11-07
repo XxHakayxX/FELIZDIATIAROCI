@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>¡Feliz Día, Tía Roci! 💖 5 de Noviembre</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        hand: ['"Caveat"', 'cursive'],
+                    },
+                    colors: {
+                        nurse: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        },
+                        rosewarm: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            touch-action: manipulation;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.22); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.22); }
+            70% { transform: scale(1); }
+        }
+        @keyframes floatUpFade {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.7) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-60px) scale(1.25) rotate(-8deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-130px) scale(1) rotate(8deg);
+            }
+        }
+        @keyframes popHeart {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 1; }
+            40% { transform: translate(-50%, -50%) scale(1.35) rotate(10deg); opacity: 1; }
+            80% { transform: translate(-50%, -65%) scale(1.1) rotate(0deg); opacity: 0.9; }
+            100% { transform: translate(-50%, -90%) scale(1.5); opacity: 0; }
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes pulseRing {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.55); }
+            50% { box-shadow: 0 0 0 15px rgba(244, 63, 94, 0); }
+        }
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-heartbeat {
+            animation: heartbeat 1.7s infinite;
+        }
+        .animate-pulse-ring {
+            animation: pulseRing 2s infinite;
+        }
+        .animate-gentle-bounce {
+            animation: gentleBounce 2.6s ease-in-out infinite;
+        }
+        .animate-spin-slow {
+            animation: spinSlow 6s linear infinite;
+        }
+        .ecg-line {
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: dash 3.2s linear infinite;
+        }
+        .floating-love-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 60;
+            animation: floatUpFade 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .insta-heart-burst {
+            position: absolute;
+            pointer-events: none;
+            z-index: 30;
+            animation: popHeart 0.95s ease-out forwards;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 flex justify-center items-start min-h-[100dvh] font-sans text-slate-800 selection:bg-rosewarm-200">
+
+    <!-- ===================================================================== -->
+    <!-- 🎵 ARCHIVOS LOCALES (Colócalos en la misma carpeta que este HTML):    -->
+    <!-- 1. Canción de fondo: "cancion.mp3"                                    -->
+    <!-- 2. Foto 1 (Tía Roci): "foto1.jpg" (o "1000073776.jpg")                -->
+    <!-- 3. Foto 2 (Juntos): "foto2.jpg" (o "dcbbacee-8b16-4247-b1b0-747c541713ab.jpg") -->
+    <!-- ===================================================================== -->
+    <audio id="bg-music" src="cancion.mp3" loop preload="auto"></audio>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div id="main-shell" class="relative w-full max-w-[460px] min-h-[100dvh] bg-gradient-to-b from-nurse-50 via-white to-rosewarm-50 shadow-2xl overflow-x-hidden flex flex-col justify-between sm:border-x sm:border-slate-700/40">
+
+        <!-- ========================================================= -->
+        <!-- 1. PORTADA DE BIENVENIDA                                  -->
+        <!-- ========================================================= -->
+        <div id="splash-screen" class="fixed inset-0 z-50 max-w-[460px] mx-auto bg-gradient-to-br from-nurse-700 via-teal-600 to-rosewarm-600 text-white flex flex-col items-center justify-between p-6 text-center transition-all duration-500">
+            
+            <!-- Encabezado superior -->
+            <div class="pt-4 space-y-1">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-xs font-extrabold uppercase tracking-widest">
+                    <i class="fa-solid fa-star text-gold-400"></i>
+                    <span>Feliz Día del Técnico en Enfermería • 5 de Noviembre</span>
+                    <i class="fa-solid fa-star text-gold-400"></i>
+                </div>
+            </div>
+
+            <!-- Tarjeta central -->
+            <div class="w-full my-auto bg-white/95 text-slate-800 rounded-[2rem] p-6 shadow-2xl border-4 border-white/60 space-y-5 relative">
+                <!-- Icono superior -->
+                <div class="w-20 h-20 mx-auto -mt-14 rounded-3xl bg-gradient-to-tr from-rosewarm-500 to-pink-500 text-white flex items-center justify-center text-4xl shadow-xl border-4 border-white animate-gentle-bounce">
+                    <i class="fa-solid fa-user-nurse"></i>
+                </div>
+
+                <div class="space-y-1.5">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-nurse-600 block">Con mucho cariño de tu sobrino</span>
+                    <h1 class="font-serif text-3xl font-extrabold text-slate-900 leading-tight">
+                        Para mi <span class="text-rosewarm-600">Tía Roci 💖</span>
+                    </h1>
+                </div>
+
+                <!-- Vista previa circular de la Foto 1 -->
+                <div class="relative w-28 h-28 mx-auto rounded-full p-1 bg-gradient-to-tr from-nurse-500 via-rosewarm-500 to-gold-400 shadow-lg">
+                    <img id="splash-preview-img"
+                         src="foto1.jpg" 
+                         alt="Tía Roci" 
+                         class="w-full h-full object-cover rounded-full border-2 border-white"
+                         onerror="handleImageFallback(this, 'tia')">
+                    <span class="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-rosewarm-500 text-white flex items-center justify-center text-base shadow border-2 border-white">
+                        ❤️
+                    </span>
+                </div>
+
+                <p class="text-slate-600 text-base font-medium leading-relaxed px-2">
+                    Hoy en tu día quiero dedicarte este detalle tan especial para que siempre recuerdes lo orgulloso que estoy de ti y lo mucho que te quiero.
+                </p>
+
+                <!-- Botón principal para abrir y reproducir canción -->
+                <button onclick="openGiftExperience()" class="animate-pulse-ring w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-rosewarm-500 via-pink-500 to-orange-500 text-white font-extrabold text-lg shadow-xl active:scale-95 transition-transform flex items-center justify-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-gift text-2xl animate-bounce"></i>
+                    <span>Abrir tu sorpresa, Tía Roci 💖</span>
+                </button>
+            </div>
+
+            <!-- Pie de portada -->
+            <p class="text-xs text-white/85 font-semibold pb-2 flex items-center gap-1.5">
+                <i class="fa-solid fa-heart text-rosewarm-200"></i> Hecho con todo el cariño para ti
+            </p>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 2. CABECERA SUPERIOR Y REPRODUCTOR DE MÚSICA              -->
+        <!-- ========================================================= -->
+        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-nurse-100 px-4 py-3 shadow-sm">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-nurse-600 to-teal-500 text-white flex items-center justify-center shadow-md shrink-0">
+                        <i class="fa-solid fa-heart-pulse text-lg animate-heartbeat"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span class="text-[11px] font-extrabold uppercase tracking-wider text-nurse-700">5 de Noviembre</span>
+                        </div>
+                        <h2 class="text-base font-extrabold text-slate-900 leading-tight">Para mi Tía Roci 💖</h2>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- Botón Reproducir / Pausar Canción (cancion.mp3) -->
+                    <button id="music-btn" onclick="toggleMusicPlayback()" class="px-3.5 h-10 rounded-2xl bg-rosewarm-50 border border-rosewarm-200 text-rosewarm-600 font-extrabold text-xs flex items-center gap-1.5 shadow-sm active:scale-90 transition cursor-pointer" title="Reproducir o pausar música">
+                        <i id="music-icon" class="fa-solid fa-play text-xs"></i>
+                        <span id="music-status-text">Música</span>
+                    </button>
+
+                    <!-- Botón de Tamaño de Letra (A+) -->
+                    <button id="font-btn" onclick="toggleLargeFont()" class="px-3 h-10 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 font-extrabold text-xs flex items-center gap-1 shadow-sm active:scale-90 transition cursor-pointer" title="Cambiar tamaño de letra">
+                        <i class="fa-solid fa-text-height"></i>
+                        <span id="font-btn-label">A+</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================================= -->
+        <!-- 3. CONTENIDO PRINCIPAL POR SECCIONES                      -->
+        <!-- ========================================================= -->
+        <main id="app-content" class="flex-1 px-4 pt-4 pb-28 space-y-6 overflow-y-auto no-scrollbar">
+
+            <!-- ===================================================== -->
+            <!-- SECCIÓN 1: INICIO Y FOTOS                             -->
+            <!-- ===================================================== -->
+            <section id="tab-inicio" class="space-y-6">
+                
+                <!-- Tarjeta Principal del 5 de Noviembre -->
+                <div class="bg-white rounded-3xl p-5 shadow-lg border border-nurse-100 text-center space-y-3 relative overflow-hidden">
+                    <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rosewarm-50 border border-rosewarm-200 text-rosewarm-600 font-extrabold text-xs">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        <span>Día del Técnico en Enfermería</span>
+                    </div>
+
+                    <h1 class="font-serif text-3xl font-extrabold text-slate-900 leading-snug">
+                        ¡Feliz Día, <span class="text-nurse-600">Tía Roci</span>! 🌟
+                    </h1>
+
+                    <!-- Línea ECG con corazón -->
+                    <div class="w-full py-1">
+                        <svg viewBox="0 0 500 70" class="w-full h-11 overflow-visible">
+                            <path class="ecg-line" fill="none" stroke="url(#ecg-grad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"
+                                d="M 0,35 L 130,35 L 155,15 L 175,60 L 195,5 L 215,65 L 235,25 L 250,35 L 285,35 C 285,18 265,6 250,20 C 235,6 215,18 215,35 C 215,52 250,65 250,65 C 250,65 285,52 285,35 L 500,35" />
+                            <defs>
+                                <linearGradient id="ecg-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#0d9488" />
+                                    <stop offset="50%" stop-color="#f43f5e" />
+                                    <stop offset="100%" stop-color="#0d9488" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <p class="reading-text text-slate-700 text-base font-medium leading-relaxed">
+                        Hoy celebramos tu hermosa vocación, tu entrega diaria y la suerte tan grande de tenerte como tía. ¡Estoy muy orgulloso de ti y te quiero muchísimo! 💖
+                    </p>
+
+                    <!-- Indicadores de Cariño y Orgullo -->
+                    <div class="grid grid-cols-2 gap-2.5 pt-2">
+                        <div onclick="triggerLoveRain(event, '❤️ ¡Te quiero muchísimo, Tía Roci!')" class="bg-nurse-50 active:bg-nurse-100 border border-nurse-200 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <div class="text-nurse-600 text-xl"><i class="fa-solid fa-heart-pulse animate-heartbeat"></i></div>
+                            <div class="text-[11px] font-bold uppercase text-slate-500 mt-0.5">Amor de Sobrino</div>
+                            <div class="text-base font-extrabold text-nurse-700">1000%</div>
+                        </div>
+                        <div onclick="triggerLoveRain(event, '🏅 ¡Estoy súper orgulloso de ti!')" class="bg-rosewarm-50 active:bg-rosewarm-100 border border-rosewarm-200 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <div class="text-rosewarm-500 text-xl"><i class="fa-solid fa-medal"></i></div>
+                            <div class="text-[11px] font-bold uppercase text-slate-500 mt-0.5">Nivel de Orgullo</div>
+                            <div class="text-base font-extrabold text-rosewarm-600">¡Infinito!</div>
+                        </div>
+                        <div onclick="triggerLoveRain(event, '👩‍⚕️ ¡Una profesional admirable!')" class="bg-amber-50 active:bg-amber-100 border border-amber-200 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <div class="text-amber-500 text-xl"><i class="fa-solid fa-hand-holding-medical"></i></div>
+                            <div class="text-[11px] font-bold uppercase text-slate-500 mt-0.5">Vocación y Entrega</div>
+                            <div class="text-base font-extrabold text-amber-700">Admirable ⭐</div>
+                        </div>
+                        <div onclick="switchTab('visita')" class="bg-purple-50 active:bg-purple-100 border border-purple-200 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <div class="text-purple-600 text-xl"><i class="fa-solid fa-house-chimney-heart"></i></div>
+                            <div class="text-[11px] font-bold uppercase text-slate-500 mt-0.5">Próxima Visita</div>
+                            <div class="text-base font-extrabold text-purple-700">¡Muy Pronto! 🤗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Encabezado de Galería -->
+                <div class="flex items-center justify-between px-1">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-rosewarm-500 block">Recuerdos Especiales</span>
+                        <h2 class="font-serif text-2xl font-extrabold text-slate-900">Nuestras Fotos 📸</h2>
+                    </div>
+                    <span class="text-xs font-bold bg-rosewarm-100 text-rosewarm-700 px-3 py-1.5 rounded-full">
+                        Toca para dar ❤️
+                    </span>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- 📸 MARCO DE FOTO 1: TÍA ROCI (Archivo: foto1.jpg)         -->
+                <!-- ========================================================= -->
+                <div class="bg-white rounded-3xl p-4 shadow-xl border border-slate-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-400 to-rosewarm-500 text-white flex items-center justify-center font-bold shadow">
+                                👑
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-extrabold text-slate-900">Mi Tía Roci, orgullo de la familia</h3>
+                                <span class="text-xs text-nurse-600 font-semibold block">5 de Noviembre • Día Especial</span>
+                            </div>
+                        </div>
+                        <button onclick="openLightbox('img-tia', 'Mi Tía Roci, siempre radiante y con un corazón enorme 💖')" class="w-9 h-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center active:scale-90 transition cursor-pointer" title="Ver grande">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+
+                    <!-- Imagen 1 -->
+                    <div class="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[4/5] select-none cursor-pointer shadow-inner" onclick="tapPhotoHeart(event, 'likes-1')">
+                        <img id="img-tia" 
+                             src="foto1.jpg" 
+                             alt="Tía Roci" 
+                             class="w-full h-full object-cover object-center"
+                             onerror="handleImageFallback(this, 'tia')">
+                        
+                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/65 backdrop-blur-sm text-white px-3.5 py-2 rounded-xl flex items-center justify-between text-xs font-bold">
+                            <span><i class="fa-solid fa-sparkles text-gold-400 mr-1"></i> ¡Una mujer y profesional ejemplar!</span>
+                            <span class="text-rosewarm-300">❤️</span>
+                        </div>
+                    </div>
+
+                    <p class="font-hand text-2xl text-slate-800 font-bold text-center pt-1">
+                        "Gracias por tu bondad y tu gran corazón 💖"
+                    </p>
+
+                    <div class="pt-1">
+                        <button onclick="likePhotoBtn('likes-1')" class="w-full py-3 px-4 rounded-2xl bg-rosewarm-50 active:bg-rosewarm-100 border border-rosewarm-200 text-rosewarm-600 font-extrabold text-sm flex items-center justify-center gap-2 transition cursor-pointer">
+                            <i class="fa-solid fa-heart text-lg animate-heartbeat"></i>
+                            <span>¡Te Quiero Muchísimo, Tía! (<span id="likes-1">128</span>)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- 📸 MARCO DE FOTO 2: JUNTOS (Archivo: foto2.jpg)           -->
+                <!-- ========================================================= -->
+                <div class="bg-white rounded-3xl p-4 shadow-xl border border-slate-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-nurse-500 to-teal-400 text-white flex items-center justify-center font-bold shadow">
+                                🤗
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-extrabold text-slate-900">Juntos en nuestros mejores momentos</h3>
+                                <span class="text-xs text-rosewarm-500 font-semibold block">Tía y Sobrino</span>
+                            </div>
+                        </div>
+                        <button onclick="openLightbox('img-juntos', '¡Qué alegría compartir tantos momentos bonitos contigo, Tía Roci! 🥰')" class="w-9 h-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center active:scale-90 transition cursor-pointer" title="Ver grande">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+
+                    <!-- Imagen 2 -->
+                    <div class="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[4/5] select-none cursor-pointer shadow-inner" onclick="tapPhotoHeart(event, 'likes-2')">
+                        <img id="img-juntos" 
+                             src="foto2.jpg" 
+                             alt="Con mi Tía Roci" 
+                             class="w-full h-full object-cover object-center"
+                             onerror="handleImageFallback(this, 'juntos')">
+                        
+                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/65 backdrop-blur-sm text-white px-3.5 py-2 rounded-xl flex items-center justify-between text-xs font-bold">
+                            <span><i class="fa-solid fa-face-laugh-beam text-gold-400 mr-1"></i> ¡Pronto repetimos más momentos así!</span>
+                            <span class="text-rosewarm-300">❤️</span>
+                        </div>
+                    </div>
+
+                    <p class="font-hand text-2xl text-slate-800 font-bold text-center pt-1">
+                        "Gracias por cada consejo, risa y abrazo 🥰"
+                    </p>
+
+                    <div class="pt-1">
+                        <button onclick="likePhotoBtn('likes-2')" class="w-full py-3 px-4 rounded-2xl bg-rosewarm-50 active:bg-rosewarm-100 border border-rosewarm-200 text-rosewarm-600 font-extrabold text-sm flex items-center justify-center gap-2 transition cursor-pointer">
+                            <i class="fa-solid fa-heart text-lg animate-heartbeat"></i>
+                            <span>¡Me Encanta Este Recuerdo! (<span id="likes-2">245</span>)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón para pasar a la Carta -->
+                <button onclick="switchTab('carta')" class="w-full py-4 rounded-2xl bg-gradient-to-r from-nurse-600 to-teal-500 text-white font-extrabold text-base shadow-lg active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <span>Leer Mi Carta Para Ti 👉</span>
+                </button>
+            </section>
+
+            <!-- ===================================================== -->
+            <!-- SECCIÓN 2: CARTA DEDICATORIA                          -->
+            <!-- ===================================================== -->
+            <section id="tab-carta" class="hidden space-y-5">
+                <div class="bg-white rounded-3xl p-6 shadow-xl border-2 border-nurse-100 space-y-5 relative">
+                    
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-rosewarm-100 text-rosewarm-600 flex items-center justify-center text-2xl shadow-sm">
+                                <i class="fa-solid fa-heart-circle-check"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-extrabold uppercase text-rosewarm-500 block">5 de Noviembre</span>
+                                <h2 class="font-serif text-2xl font-extrabold text-slate-900">Para Ti, Tía Roci</h2>
+                            </div>
+                        </div>
+                        <button onclick="toggleLargeFont()" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-extrabold cursor-pointer">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Letra
+                        </button>
+                    </div>
+
+                    <!-- Cuerpo de la carta (Mención #1 de "chacho" al final de forma natural) -->
+                    <div class="reading-text space-y-4 text-slate-700 text-lg leading-relaxed">
+                        <p class="font-hand text-3xl text-nurse-700 font-bold">
+                            ¡Querida Tía Roci! 💖
+                        </p>
+
+                        <p>
+                            Hoy <strong>5 de noviembre</strong>, en el <strong>Día del Técnico en Enfermería</strong>, quiero dedicarte estas palabras con todo el corazón para que sepas lo importante que eres en mi vida.
+                        </p>
+
+                        <div class="bg-nurse-50 border-l-4 border-nurse-500 p-4 rounded-r-2xl font-semibold text-nurse-900">
+                            "Quiero que sepas que estoy súper orgulloso de ti, de tu esfuerzo de cada día, de la paciencia y el cariño con que cuidas a los demás, y de la gran mujer que eres."
+                        </div>
+
+                        <p>
+                            Tu labor es admirable porque no solo alivias con tus conocimientos, sino también con tu calidez y tu sonrisa. Gracias por ser una tía tan buena, atenta y cariñosa conmigo siempre. <strong class="text-rosewarm-600">¡Te quiero muchísimo!</strong>
+                        </p>
+
+                        <p class="bg-amber-50 border border-amber-200 p-4 rounded-2xl text-slate-800 font-medium">
+                            🤗 Y prepárate que muy pronto te visitaré pa' estar de <strong>chacho</strong> ahí en la casa jajaja, ayudándote en lo que necesites y pasando un bonito rato juntos. 💖
+                        </p>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 font-bold uppercase block">Con todo mi cariño,</span>
+                            <span class="font-hand text-2xl font-bold text-rosewarm-600">Tu sobrino que te quiere mucho 🥰</span>
+                        </div>
+                        <button onclick="launchCelebration('💖 ¡Te quiero muchísimo, Tía Roci!')" class="px-4 py-2.5 rounded-2xl bg-rosewarm-500 text-white font-bold text-sm shadow-md active:scale-95 transition cursor-pointer">
+                            <i class="fa-solid fa-heart mr-1"></i> ¡Mandar Abrazo!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón hacia la Promesa de Visita -->
+                <button onclick="switchTab('visita')" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-extrabold text-base shadow-lg active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-ticket text-lg"></i>
+                    <span>Ver Mi Promesa de Visita 👉</span>
+                </button>
+            </section>
+
+            <!-- ===================================================== -->
+            <!-- SECCIÓN 3: PROMESA DE VISITA                          -->
+            <!-- ===================================================== -->
+            <section id="tab-visita" class="hidden space-y-5">
+                <div class="bg-gradient-to-br from-amber-50 via-white to-orange-50 rounded-3xl p-5 shadow-xl border-2 border-dashed border-amber-400 space-y-4">
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-amber-200 text-amber-900 font-extrabold text-xs uppercase">
+                            🎟️ Cupón Oficial de Visita
+                        </span>
+                        <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">
+                            ✅ Válido Muy Pronto
+                        </span>
+                    </div>
+
+                    <!-- Mención #2 (y última) de "chacho" de manera natural -->
+                    <div class="text-center space-y-1">
+                        <div class="text-4xl mb-1">🏡☕🧹</div>
+                        <h2 class="font-serif text-2xl font-extrabold text-slate-900">
+                            Promesa de Visita a Casa
+                        </h2>
+                        <p class="reading-text text-slate-600 text-sm">
+                            Vale válido para cuando vaya a visitarte y quedarme de chacho ahí en la casa jajaja. Toca cada tarea para dejarla anotada:
+                        </p>
+                    </div>
+
+                    <!-- Lista de actividades para tocar -->
+                    <div class="space-y-2.5" id="visit-tasks-list">
+                        
+                        <div onclick="toggleVisitTask(this)" data-active="true" class="visit-item flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 cursor-pointer active:scale-98 transition select-none">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🍰</span>
+                                <div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm">Engreírte con tu comida o postre favorito</h4>
+                                    <span class="text-xs text-slate-500">Para celebrar juntos como te mereces</span>
+                                </div>
+                            </div>
+                            <span class="task-badge px-2.5 py-1 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shrink-0">
+                                ¡Anotado, Tía! ✅
+                            </span>
+                        </div>
+
+                        <div onclick="toggleVisitTask(this)" data-active="true" class="visit-item flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 cursor-pointer active:scale-98 transition select-none">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🧹</span>
+                                <div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm">Ayudarte con todos los quehaceres de la casa</h4>
+                                    <span class="text-xs text-slate-500">Limpiar, ordenar y dejar todo impecable</span>
+                                </div>
+                            </div>
+                            <span class="task-badge px-2.5 py-1 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shrink-0">
+                                ¡Anotado, Tía! ✅
+                            </span>
+                        </div>
+
+                        <div onclick="toggleVisitTask(this)" data-active="true" class="visit-item flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 cursor-pointer active:scale-98 transition select-none">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🛍️</span>
+                                <div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm">Ir por los mandados que necesites</h4>
+                                    <span class="text-xs text-slate-500">Al toque y con toda la actitud</span>
+                                </div>
+                            </div>
+                            <span class="task-badge px-2.5 py-1 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shrink-0">
+                                ¡Anotado, Tía! ✅
+                            </span>
+                        </div>
+
+                        <div onclick="toggleVisitTask(this)" data-active="true" class="visit-item flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 cursor-pointer active:scale-98 transition select-none">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">☕</span>
+                                <div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm">Tardes de risas, chisme y cafecito</h4>
+                                    <span class="text-xs text-slate-500">Ponernos al día y pasarla genial en familia</span>
+                                </div>
+                            </div>
+                            <span class="task-badge px-2.5 py-1 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shrink-0">
+                                ¡Anotado, Tía! ✅
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Resumen de la promesa -->
+                    <div class="bg-amber-100/80 rounded-2xl p-3.5 text-center border border-amber-300">
+                        <span class="text-xs font-bold uppercase text-amber-800 block">Estado del Vale:</span>
+                        <p id="visit-summary" class="text-sm font-extrabold text-slate-900 mt-0.5">
+                            4 actividades anotadas para mi próxima visita 🤗
+                        </p>
+                    </div>
+
+                    <!-- Botón para confirmar el vale -->
+                    <button onclick="claimVisitTicket()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-nurse-600 to-emerald-600 text-white font-extrabold text-base shadow-lg active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-check-double text-lg"></i>
+                        <span>¡Guardar Mi Vale de Visita!</span>
+                    </button>
+
+                    <!-- Confirmación visual -->
+                    <div id="visit-ticket-confirmed" class="hidden bg-emerald-600 text-white p-4 rounded-2xl text-center space-y-1 shadow-inner">
+                        <p class="font-extrabold text-base">🎉 ¡PROMESA GUARDADA! 🎉</p>
+                        <p class="text-xs text-emerald-100">
+                            ¡Cuenta con ello, Tía Roci! Muy pronto nos vemos en casa para compartir y engreírte mucho 💖
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================== -->
+            <!-- SECCIÓN 4: RECONOCIMIENTO (BOTIQUÍN + DIPLOMA)        -->
+            <!-- ===================================================== -->
+            <section id="tab-premio" class="hidden space-y-6">
+                
+                <!-- Botiquín de Cariño -->
+                <div class="bg-white rounded-3xl p-5 shadow-lg border border-nurse-100 space-y-4">
+                    <div class="text-center space-y-1">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-nurse-600">
+                            <i class="fa-solid fa-kit-medical mr-1"></i> Receta Especial • 5 de Noviembre
+                        </span>
+                        <h3 class="font-serif text-2xl font-extrabold text-slate-900">Tu Botiquín de Cariño 💊</h3>
+                        <p class="text-xs text-slate-500 font-semibold">Toca cada elemento para leer tu receta especial:</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button onclick="selectMedicine('abrazos')" class="p-3.5 rounded-2xl bg-rosewarm-50 active:bg-rosewarm-100 border border-rosewarm-200 text-center space-y-1 transition cursor-pointer">
+                            <div class="text-2xl">🤗</div>
+                            <div class="font-extrabold text-slate-800 text-sm">Jarabe de Abrazos</div>
+                            <div class="text-[11px] text-rosewarm-600 font-bold">Ver receta</div>
+                        </button>
+                        <button onclick="selectMedicine('descanso')" class="p-3.5 rounded-2xl bg-nurse-50 active:bg-nurse-100 border border-nurse-200 text-center space-y-1 transition cursor-pointer">
+                            <div class="text-2xl">☕</div>
+                            <div class="font-extrabold text-slate-800 text-sm">Dosis de Engreimiento</div>
+                            <div class="text-[11px] text-nurse-700 font-bold">Ver receta</div>
+                        </button>
+                        <button onclick="selectMedicine('risas')" class="p-3.5 rounded-2xl bg-amber-50 active:bg-amber-100 border border-amber-200 text-center space-y-1 transition cursor-pointer">
+                            <div class="text-2xl">😂</div>
+                            <div class="font-extrabold text-slate-800 text-sm">Vitaminas de Alegría</div>
+                            <div class="text-[11px] text-amber-700 font-bold">Ver receta</div>
+                        </button>
+                        <button onclick="selectMedicine('orgullo')" class="p-3.5 rounded-2xl bg-purple-50 active:bg-purple-100 border border-purple-200 text-center space-y-1 transition cursor-pointer">
+                            <div class="text-2xl">🌟</div>
+                            <div class="font-extrabold text-slate-800 text-sm">Reconocimiento</div>
+                            <div class="text-[11px] text-purple-700 font-bold">Ver receta</div>
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-4 border-l-4 border-nurse-500">
+                        <span class="text-[11px] font-extrabold uppercase text-nurse-600 block">Receta para hoy:</span>
+                        <p id="medicine-output" class="reading-text text-sm font-bold text-slate-800 mt-1">
+                            "Se receta a la Tía Roci pasar un 5 de noviembre inolvidable, disfrutar muchísimo y recibir todo el cariño de su familia."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Diploma de Honor -->
+                <div class="bg-white rounded-3xl p-6 shadow-2xl border-4 border-double border-gold-400 text-center space-y-4 relative overflow-hidden">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-gold-500 to-amber-300 text-white flex items-center justify-center text-3xl shadow-lg border-4 border-white">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+
+                    <div>
+                        <span class="text-[11px] font-extrabold uppercase tracking-widest text-gold-600 block">Diploma Oficial • 5 de Noviembre</span>
+                        <h3 class="font-serif text-2xl font-extrabold text-slate-900 mt-1">
+                            Mejor Técnica en Enfermería y Mejor Tía del Mundo
+                        </h3>
+                    </div>
+
+                    <div class="py-2 border-y border-slate-200">
+                        <span class="text-xs text-slate-400 uppercase font-bold block">Otorgado con mucho orgullo a:</span>
+                        <span class="font-hand text-4xl font-bold text-rosewarm-600">Tía Roci 💖</span>
+                    </div>
+
+                    <p class="reading-text text-slate-600 text-sm leading-relaxed">
+                        Por su admirable vocación cuidando la salud de los demás, su bondad infinita y por ser una tía tan querida y especial.
+                    </p>
+
+                    <div class="pt-2">
+                        <button id="stamp-btn" onclick="stampDiploma()" class="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-gold-500 to-amber-500 text-white font-extrabold text-sm shadow-lg active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-stamp text-lg"></i>
+                            <span id="stamp-label">Toca aquí para Sellar tu Reconocimiento</span>
+                        </button>
+                    </div>
+
+                    <div id="diploma-seal" class="hidden pt-2">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-rosewarm-50 border-2 border-rosewarm-500 text-rosewarm-600 font-extrabold text-xs uppercase -rotate-2 shadow-sm">
+                            <i class="fa-solid fa-certificate text-base"></i>
+                            <span>¡SELLADO CON AMOR Y ORGULLO!</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========================================================= -->
+        <!-- 4. BOTÓN FLOTANTE DE CARIÑO                               -->
+        <!-- ========================================================= -->
+        <button onclick="triggerLoveRain(event)" class="fixed bottom-24 right-4 sm:right-[calc(50%-215px)] z-30 w-14 h-14 rounded-full bg-gradient-to-tr from-rosewarm-600 to-pink-500 text-white shadow-2xl border-2 border-white flex flex-col items-center justify-center active:scale-90 transition cursor-pointer animate-pulse-ring" aria-label="Enviar Cariño">
+            <i class="fa-solid fa-heart text-xl"></i>
+            <span class="text-[9px] font-extrabold uppercase leading-none mt-0.5">Cariño</span>
+        </button>
+
+        <!-- ========================================================= -->
+        <!-- 5. BARRA DE NAVEGACIÓN INFERIOR                           -->
+        <!-- ========================================================= -->
+        <nav class="fixed bottom-0 left-0 right-0 z-40 max-w-[460px] mx-auto bg-white/95 backdrop-blur-lg border-t border-slate-200 px-2 py-2 shadow-[0_-8px_25px_rgba(0,0,0,0.08)]">
+            <div class="grid grid-cols-4 gap-1">
+                
+                <button onclick="switchTab('inicio')" id="nav-inicio" class="nav-tab flex flex-col items-center justify-center py-2 rounded-2xl bg-nurse-50 text-nurse-700 font-extrabold transition cursor-pointer">
+                    <i class="fa-solid fa-images text-lg mb-0.5"></i>
+                    <span class="text-[11px]">Inicio y Fotos</span>
+                </button>
+
+                <button onclick="switchTab('carta')" id="nav-carta" class="nav-tab flex flex-col items-center justify-center py-2 rounded-2xl text-slate-500 font-bold transition cursor-pointer">
+                    <i class="fa-solid fa-envelope-open-heart text-lg mb-0.5"></i>
+                    <span class="text-[11px]">Mi Carta</span>
+                </button>
+
+                <button onclick="switchTab('visita')" id="nav-visita" class="nav-tab relative flex flex-col items-center justify-center py-2 rounded-2xl text-slate-500 font-bold transition cursor-pointer">
+                    <span class="absolute top-1 right-5 w-2 h-2 rounded-full bg-amber-500"></span>
+                    <i class="fa-solid fa-house-chimney-heart text-lg mb-0.5"></i>
+                    <span class="text-[11px]">Mi Visita</span>
+                </button>
+
+                <button onclick="switchTab('premio')" id="nav-premio" class="nav-tab flex flex-col items-center justify-center py-2 rounded-2xl text-slate-500 font-bold transition cursor-pointer">
+                    <i class="fa-solid fa-award text-lg mb-0.5"></i>
+                    <span class="text-[11px]">Diploma</span>
+                </button>
+
+            </div>
+        </nav>
+
+        <!-- ========================================================= -->
+        <!-- 6. VISOR DE FOTO AMPLIADA (LIGHTBOX)                      -->
+        <!-- ========================================================= -->
+        <div id="lightbox" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex-col items-center justify-center p-4" onclick="closeLightbox()">
+            <div class="relative w-full max-w-[410px] bg-white rounded-3xl p-4 shadow-2xl space-y-3 text-center" onclick="event.stopPropagation()">
+                <button onclick="closeLightbox()" class="absolute -top-3 -right-3 w-11 h-11 rounded-full bg-rosewarm-500 text-white font-bold text-lg shadow-lg flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="rounded-2xl overflow-hidden bg-slate-100 max-h-[68dvh] flex items-center justify-center">
+                    <img id="lightbox-img" src="" alt="Foto ampliada" class="max-h-[68dvh] w-auto object-contain">
+                </div>
+                <p id="lightbox-caption" class="font-hand text-2xl text-slate-800 font-bold px-2"></p>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 7. NOTIFICACIÓN SUPERIOR                                  -->
+        <!-- ========================================================= -->
+        <div id="toast-banner" class="fixed top-16 left-4 right-4 max-w-[420px] mx-auto z-50 transform -translate-y-28 opacity-0 transition-all duration-300 pointer-events-none">
+            <div class="bg-slate-900/95 backdrop-blur-md text-white px-4 py-3 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
+                <span id="toast-emoji" class="text-2xl shrink-0">💖</span>
+                <p id="toast-text" class="text-xs sm:text-sm font-bold leading-snug"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // =========================================================
+        // 1. ABRIR PORTADA Y REPRODUCIR CANCIÓN DE FONDO
+        // =========================================================
+        function openGiftExperience() {
+            const splash = document.getElementById('splash-screen');
+            splash.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+            setTimeout(() => {
+                splash.classList.add('hidden');
+            }, 450);
+
+            startMusicOnOpen();
+            launchCelebration('🎉 ¡Feliz Día del Técnico en Enfermería, Tía Roci!');
+        }
+
+        // =========================================================
+        // 2. SISTEMA DE CANCIÓN DE FONDO (cancion.mp3 + RESPALDO)
+        // =========================================================
+        let isMusicPlaying = false;
+        let usingWebAudioFallback = false;
+        let audioCtx = null;
+        let melodyTimer = null;
+
+        function startMusicOnOpen() {
+            const bgAudio = document.getElementById('bg-music');
+            if (!bgAudio) return;
+
+            const playPromise = bgAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isMusicPlaying = true;
+                    usingWebAudioFallback = false;
+                    updateMusicButtonUI(true);
+                }).catch(() => {
+                    isMusicPlaying = true;
+                    usingWebAudioFallback = true;
+                    updateMusicButtonUI(true);
+                    playMelodyLoop();
+                });
+            }
+        }
+
+        function toggleMusicPlayback() {
+            const bgAudio = document.getElementById('bg-music');
+
+            if (isMusicPlaying) {
+                isMusicPlaying = false;
+                bgAudio.pause();
+                clearTimeout(melodyTimer);
+                updateMusicButtonUI(false);
+                showToast('🎵', 'Música en pausa');
+                return;
+            }
+
+            bgAudio.play().then(() => {
+                isMusicPlaying = true;
+                usingWebAudioFallback = false;
+                updateMusicButtonUI(true);
+                showToast('🎶', 'Reproduciendo tu canción de fondo');
+            }).catch(() => {
+                isMusicPlaying = true;
+                usingWebAudioFallback = true;
+                updateMusicButtonUI(true);
+                playMelodyLoop();
+                showToast('🎶', 'Reproduciendo melodía');
+            });
+        }
+
+        function updateMusicButtonUI(playing) {
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-status-text');
+            if (playing) {
+                icon.className = 'fa-solid fa-pause text-xs';
+                text.innerText = 'Sonando';
+            } else {
+                icon.className = 'fa-solid fa-play text-xs';
+                text.innerText = 'Música';
+            }
+        }
+
+        // =========================================================
+        // 3. NAVEGACIÓN ENTRE SECCIONES
+        // =========================================================
+        function switchTab(tabName) {
+            const tabs = ['inicio', 'carta', 'visita', 'premio'];
+            tabs.forEach(t => {
+                const section = document.getElementById(`tab-${t}`);
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (t === tabName) {
+                    section.classList.remove('hidden');
+                    navBtn.className = 'nav-tab flex flex-col items-center justify-center py-2 rounded-2xl bg-nurse-50 text-nurse-700 font-extrabold transition cursor-pointer scale-105';
+                } else {
+                    section.classList.add('hidden');
+                    navBtn.className = 'nav-tab flex flex-col items-center justify-center py-2 rounded-2xl text-slate-500 font-bold transition cursor-pointer';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =========================================================
+        // 4. TAMAÑO DE LETRA (A+)
+        // =========================================================
+        let largeFontEnabled = false;
+        function toggleLargeFont() {
+            largeFontEnabled = !largeFontEnabled;
+            const texts = document.querySelectorAll('.reading-text');
+            const label = document.getElementById('font-btn-label');
+
+            texts.forEach(el => {
+                if (largeFontEnabled) {
+                    el.classList.add('!text-xl', '!leading-relaxed');
+                } else {
+                    el.classList.remove('!text-xl', '!leading-relaxed');
+                }
+            });
+
+            label.innerText = largeFontEnabled ? 'A-' : 'A+';
+            showToast('🔍', largeFontEnabled ? 'Letra más grande activada' : 'Tamaño de letra estándar');
+        }
+
+        // =========================================================
+        // 5. FOTOS LOCALES Y CORAZONES AL TOCAR
+        // =========================================================
+        function tapPhotoHeart(event, counterId) {
+            const container = event.currentTarget;
+            const rect = container.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const heart = document.createElement('div');
+            heart.className = 'insta-heart-burst text-5xl select-none';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            heart.innerText = '💖';
+            container.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 950);
+
+            const countEl = document.getElementById(counterId);
+            countEl.innerText = (parseInt(countEl.innerText, 10) || 100) + 1;
+
+            playTapNote(659.25);
+        }
+
+        function likePhotoBtn(counterId) {
+            const countEl = document.getElementById(counterId);
+            countEl.innerText = (parseInt(countEl.innerText, 10) || 100) + 1;
+            triggerLoveRain(null, '📸 ¡Qué lindo recuerdo con mi Tía Roci!');
+        }
+
+        // Si las fotos tienen sus nombres originales de archivo, las busca automáticamente
+        function handleImageFallback(imgElement, type) {
+            const triedOriginal = imgElement.getAttribute('data-tried-original');
+            if (!triedOriginal) {
+                imgElement.setAttribute('data-tried-original', 'true');
+                imgElement.src = type === 'tia' ? '1000073776.jpg' : 'dcbbacee-8b16-4247-b1b0-747c541713ab.jpg';
+                return;
+            }
+
+            const svgTia = `data:image/svg+xml;utf8,${encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+                    <rect width="400" height="500" fill="#ccfbf1"/>
+                    <circle cx="200" cy="200" r="82" fill="#ffffff" stroke="#14b8a6" stroke-width="4"/>
+                    <text x="200" y="224" font-size="68" text-anchor="middle">👩‍⚕️</text>
+                    <text x="200" y="335" font-family="sans-serif" font-size="24" font-weight="bold" fill="#0f766e" text-anchor="middle">Mi Querida Tía Roci 💖</text>
+                </svg>
+            `)}`;
+
+            const svgJuntos = `data:image/svg+xml;utf8,${encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+                    <rect width="400" height="500" fill="#ffe4e6"/>
+                    <circle cx="200" cy="200" r="82" fill="#ffffff" stroke="#f43f5e" stroke-width="4"/>
+                    <text x="200" y="224" font-size="64" text-anchor="middle">🤗💖</text>
+                    <text x="200" y="335" font-family="sans-serif" font-size="24" font-weight="bold" fill="#e11d48" text-anchor="middle">Tía Roci y Sobrino 📸</text>
+                </svg>
+            `)}`;
+
+            imgElement.onerror = null;
+            imgElement.src = type === 'tia' ? svgTia : svgJuntos;
+        }
+
+        function openLightbox(imgId, caption) {
+            const src = document.getElementById(imgId).src;
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-caption').innerText = caption;
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('hidden');
+            lb.classList.remove('flex');
+        }
+
+        // =========================================================
+        // 6. PROMESA DE VISITA INTERACTIVA
+        // =========================================================
+        function toggleVisitTask(cardEl) {
+            const isActive = cardEl.getAttribute('data-active') === 'true';
+            const badge = cardEl.querySelector('.task-badge');
+
+            if (isActive) {
+                cardEl.setAttribute('data-active', 'false');
+                cardEl.className = 'visit-item flex items-center justify-between p-3.5 rounded-2xl bg-white border-2 border-slate-200 cursor-pointer active:scale-98 transition select-none';
+                badge.className = 'task-badge px-2.5 py-1 rounded-xl bg-slate-200 text-slate-600 font-extrabold text-xs shrink-0';
+                badge.innerText = 'Elegir +';
+            } else {
+                cardEl.setAttribute('data-active', 'true');
+                cardEl.className = 'visit-item flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 cursor-pointer active:scale-98 transition select-none';
+                badge.className = 'task-badge px-2.5 py-1 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shrink-0';
+                badge.innerText = '¡Anotado, Tía! ✅';
+                playTapNote(783.99);
+            }
+
+            const activeCount = document.querySelectorAll('.visit-item[data-active="true"]').length;
+            const summary = document.getElementById('visit-summary');
+            if (activeCount === 0) {
+                summary.innerText = '¡Toca las actividades que quieras para mi visita! 🤗';
+            } else {
+                summary.innerText = `${activeCount} actividad${activeCount > 1 ? 'es' : ''} anotada${activeCount > 1 ? 's' : ''} para mi próxima visita 🤗`;
+            }
+        }
+
+        function claimVisitTicket() {
+            const confirmedBox = document.getElementById('visit-ticket-confirmed');
+            confirmedBox.classList.remove('hidden');
+            launchCelebration('🏡 ¡Promesa lista, Tía Roci! Pronto te visito en casa 💖');
+        }
+
+        // =========================================================
+        // 7. BOTIQUÍN Y SELLO DEL DIPLOMA
+        // =========================================================
+        const medicineData = {
+            abrazos: '"Receta N° 1: Un abrazo fuerte y lleno de cariño de tu sobrino apenas llegue a visitarte a casa."',
+            descanso: '"Receta N° 2: Hoy 5 de noviembre queda prohibido estresarse. Te toca descansar y que te consientan mucho."',
+            risas: '"Receta N° 3: Dosis doble de alegría, buenas charlas y risas en familia cuando nos veamos."',
+            orgullo: '"Receta N° 4: Recordar siempre que eres una Técnica en Enfermería ejemplar y que estoy súper orgulloso de ti, Tía Roci."'
+        };
+
+        function selectMedicine(key) {
+            document.getElementById('medicine-output').innerText = medicineData[key];
+            playTapNote(659.25);
+            showToast('💊', '¡Receta especial para ti, Tía Roci!');
+        }
+
+        function stampDiploma() {
+            document.getElementById('diploma-seal').classList.remove('hidden');
+            document.getElementById('stamp-label').innerText = '¡Reconocimiento Sellado! 🏅';
+            launchCelebration('🏅 ¡Felicidades a la Mejor Tía y Técnica en Enfermería!');
+        }
+
+        // =========================================================
+        // 8. LLUVIA DE CARIÑO Y NOTIFICACIONES
+        // =========================================================
+        const sweetPhrases = [
+            '💖 ¡Te quiero muchísimo, Tía Roci!',
+            '👩‍⚕️ ¡Feliz Día del Técnico en Enfermería!',
+            '🌟 ¡Estoy súper orgulloso de ti!',
+            '🏡 ¡Muy pronto voy a visitarte a la casa!',
+            '🤗 ¡Gracias por ser una tía tan maravillosa!'
+        ];
+        let phraseIndex = 0;
+
+        function triggerLoveRain(event, customMessage) {
+            const emojis = ['💖', '👩‍⚕️', '🩺', '✨', '🌸', '❤️', '🤗', '⭐'];
+            for (let i = 0; i < 9; i++) {
+                const el = document.createElement('div');
+                el.className = 'floating-love-particle text-2xl sm:text-3xl select-none';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                const startX = Math.floor(Math.random() * 76) + 12;
+                const startY = Math.floor(Math.random() * 35) + 50;
+                el.style.left = `${startX}%`;
+                el.style.top = `${startY}%`;
+                el.style.animationDelay = `${i * 0.06}s`;
+
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 1900);
+            }
+
+            playTapNote(880);
+            const msg = customMessage || sweetPhrases[phraseIndex % sweetPhrases.length];
+            phraseIndex++;
+            showToast('💖', msg);
+        }
+
+        function launchCelebration(msg) {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 75,
+                    spread: 70,
+                    origin: { y: 0.65 },
+                    colors: ['#14b8a6', '#f43f5e', '#fbbf24', '#ec4899']
+                });
+            }
+            if (msg) showToast('🎉', msg);
+        }
+
+        let toastTimeout = null;
+        function showToast(emoji, text) {
+            const toast = document.getElementById('toast-banner');
+            document.getElementById('toast-emoji').innerText = emoji;
+            document.getElementById('toast-text').innerText = text;
+            toast.classList.remove('-translate-y-28', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('-translate-y-28', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // =========================================================
+        // 9. SONIDOS SUAVES DE INTERACCIÓN Y MELODÍA DE RESPALDO
+        // =========================================================
+        function playTapNote(freq) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.22);
+            } catch (e) {}
+        }
+
+        function playMelodyLoop() {
+            if (!isMusicPlaying || !usingWebAudioFallback) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const notes = [
+                    { f: 523.25, d: 0.35 }, { f: 659.25, d: 0.35 }, { f: 783.99, d: 0.35 }, { f: 659.25, d: 0.35 },
+                    { f: 880.00, d: 0.42 }, { f: 783.99, d: 0.42 }, { f: 659.25, d: 0.42 }, { f: 587.33, d: 0.42 },
+                    { f: 523.25, d: 0.55 }
+                ];
+
+                let offset = 0;
+                notes.forEach(n => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(n.f, audioCtx.currentTime + offset);
+                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime + offset);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + offset + n.d);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + offset);
+                    osc.stop(audioCtx.currentTime + offset + n.d);
+                    offset += n.d;
+                });
+
+                melodyTimer = setTimeout(() => {
+                    if (isMusicPlaying && usingWebAudioFallback) playMelodyLoop();
+                }, offset * 1000 + 500);
+            } catch (e) {
+                isMusicPlaying = false;
+            }
+        }
+    </script>
+</body>
+</html>
